@@ -1,12 +1,18 @@
 import { expect } from "chai"
+import { initializeTestDb } from "./helper/test.js"
 
 describe("Testing basic database functionality", () => {
+ 
+ before(() => {
+   initializeTestDb()
+ })
+
  it("should get all tasks", async () => {
-    const response = await fetch("http://localhost:3001/")
-    const data = await response.json()
-    expect(response.status).to.equal(200)
-    expect(data).to.be.an("array").that.is.not.empty
-    expect(data[0]).to.include.all.keys(["id", "description"])
+   const response = await fetch("http://localhost:3001/")
+   const data = await response.json()
+   expect(response.status).to.equal(200)
+   expect(data).to.be.an("array").that.is.not.empty
+   expect(data[0]).to.include.all.keys(["id", "description"])
  })
 
 
@@ -44,4 +50,19 @@ describe("Testing basic database functionality", () => {
  })
 
 
+})
+
+describe("Testing user management", () => {
+ it("should sign up", async () => {
+   const newUser = { email: "foo@test.com" ,password: "password123" }
+   const response = await fetch("http://localhost:3001/user/signup", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ user: newUser })
+   })
+   const data = await response.json()
+   expect(response.status).to.equal(201)
+   expect(data).to.include.all.keys(["id", "email"])
+   expect(data.email).to.equal(newUser.email)
+ })
 })
