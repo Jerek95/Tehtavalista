@@ -1,8 +1,11 @@
 import { pool } from '../helper/db.js'
 import { Router } from 'express'
 import { auth } from '../helper/auth.js'
+import { getTasks, postTask, removeTask } from '../controllers/TaskController.js'
 
 const router = Router()
+
+//router.get('/', getTasks)
 
 router.get('/', (req, res, next) => {
  //const pool = openDb()
@@ -13,6 +16,8 @@ router.get('/', (req, res, next) => {
     res.status(200).json(result.rows)
     })
 })
+
+//router.post('/create', auth, postTask)
 
 router.post('/create', auth,(req, res, next) => {
  //const pool = openDb() 
@@ -28,6 +33,8 @@ router.post('/create', auth,(req, res, next) => {
     res.status(201).json({id: result.rows[0].id, description: task.description})
     })
 })
+
+//router.delete('/delete/:id', auth, removeTask)
 
 router.delete('/delete/:id', auth, (req, res, next) => {
  //const pool = openDb()

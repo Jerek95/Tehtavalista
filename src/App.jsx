@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import axios from 'axios'
 import Row from './components/Row'
-import { useUser } from '../context/useUser'
+import { useUser } from './context/useUser'
 
 const url = "http://localhost:3001"
 
@@ -26,7 +26,7 @@ function App() {
     const headers = {headers: {Authorization: user.token}}
     const newTask = { description: task }
 
-    axios.post(url + "/create", {task: newTask}, headers)
+    axios.post(url + "/create", {task: newTask}, headers) //, headers
       .then(response => {
         setTasks([...tasks,response.data])
         setTask('')
@@ -40,7 +40,7 @@ function App() {
   const deleteTask = (deleted) => {
     const headers = {headers: {Authorization: user.token}}
 
-    axios.delete(url + "/delete/" + deleted, headers)
+    axios.delete(url + "/delete/" + deleted, headers) //, headers
       .then(response => {
         setTasks(tasks.filter(item => item.id !== deleted))
       })

@@ -35,6 +35,7 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    {/* <App /> */}
     <UserProvider>
       <RouterProvider router={router} />
     </UserProvider>
