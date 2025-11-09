@@ -20,7 +20,7 @@ router.get('/', (req, res, next) => {
 //router.post('/create', auth, postTask)
 
 router.post('/create', auth,(req, res, next) => {
- //const pool = openDb() 
+ 
  const { task } = req.body
  if (!task) {
     return res.status(400).json({error: 'Task is required'})
@@ -37,7 +37,7 @@ router.post('/create', auth,(req, res, next) => {
 //router.delete('/delete/:id', auth, removeTask)
 
 router.delete('/delete/:id', auth, (req, res, next) => {
- //const pool = openDb()
+ 
  const { id } = req.params
  console.log(`Deleting task with id: ${id}`)
  pool.query('delete from task WHERE id = $1',
@@ -54,9 +54,5 @@ router.delete('/delete/:id', auth, (req, res, next) => {
     return res.status(200).json({id:id})
     })
 })
-/*
-app.listen(port, () => { 
- console.log(`Server is running on http://localhost:${port}`)
-})
-*/
+
 export default router;

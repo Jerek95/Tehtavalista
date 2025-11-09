@@ -26,7 +26,7 @@ function App() {
     const headers = {headers: {Authorization: user.token}}
     const newTask = { description: task }
 
-    axios.post(url + "/create", {task: newTask}, headers) //, headers
+    axios.post(url + "/create", {task: newTask}, headers) 
       .then(response => {
         setTasks([...tasks,response.data])
         setTask('')
@@ -40,7 +40,7 @@ function App() {
   const deleteTask = (deleted) => {
     const headers = {headers: {Authorization: user.token}}
 
-    axios.delete(url + "/delete/" + deleted, headers) //, headers
+    axios.delete(url + "/delete/" + deleted, headers) 
       .then(response => {
         setTasks(tasks.filter(item => item.id !== deleted))
       })
